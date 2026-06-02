@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+
+{% block title %}Register - QR Code Generator{% endblock %}
+
+{% block main_class %}{% endblock %}
+
+{% block content %}
+<div class="min-vh-100 d-flex align-items-center justify-content-center bg-gradient">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="card shadow-lg border-0">
+                    <div class="card-body p-5">
+                        <!-- Header -->
+                        <div class="text-center mb-4">
+                            <div class="mb-3">
+                                <i class="fas fa-qrcode text-success" style="font-size: 3rem;"></i>
+                            </div>
+                            <h2 class="card-title text-success">Create Account</h2>
+                            <p class="text-muted">Join us and start generating QR codes</p>
+                        </div>
+
+                        <!-- Registration Form -->
+                        <form method="POST" action="{{ url_for('auth.register') }}" class="needs-validation" novalidate>
+                            <!-- Username -->
+                            <div class="mb-3">
+                                <label for="username" class="form-label fw-bold">
+                                    <i class="fas fa-user"></i> Username
+                                </label>
+                                <input 
+                                    type="text" 
+                                    class="form-control form-control-lg" 
+                                    id="username" 
+                                    name="username"
+                                    placeholder="Choose a unique username" 
+                                    required
+                                    minlength="3"
+                                    maxlength="80"
+                                    autofocus
+                                >
+                                <small class="text-muted">3-80 characters, no special characters</small>
+                                <div class="invalid-feedback">
+                                    Username must be 3-80 characters long.
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label fw-bold">
+                                    <i class="fas fa-envelope"></i> Email Address
+                                </label>
+                                <input 
+                                    type="email" 
+                                    class="form-control form-control-lg" 
+                                    id="email" 
+                                    name="email"
+                                    placeholder="your@email.com" 
+                                    required
+                                >
+                                <div class="invalid-feedback">
+                                    Please enter a valid email address.
+                                </div>
+                            </div>
+
+                            <!-- Password -->
+                            <div class="mb-3">
+                                <label for="password" class="form-label fw-bold">
+                                    <i class="fas fa-lock"></i> Password
+                                </label>
+                                <input 
+                                    type="password" 
+                                    class="form-control form-control-lg" 
+                                    id="password" 
+                                    name="password"
+                                    placeholder="Create a strong password" 
+                                    required
+                                    minlength="6"
+                                >
+                                <small class="text-muted">At least 6 characters</small>
+                                <div class="invalid-feedback">
+                                    Password must be at least 6 characters long.
+                                </div>
+                            </div>
+
+                            <!-- Confirm Password -->
+                            <div class="mb-3">
+                                <label for="confirm_password" class="form-label fw-bold">
+                                    <i class="fas fa-check-circle"></i> Confirm Password
+                                </label>
+                                <input 
+                                    type="password" 
+                                    class="form-control form-control-lg" 
+                                    id="confirm_password" 
+                                    name="confirm_password"
+                                    placeholder="Confirm your password" 
+                                    required
+                                >
+                                <div class="invalid-feedback">
+                                    Passwords do not match.
+                                </div>
+                            </div>
+
+                            <!-- Password Strength Indicator -->
+                            <div class="mb-3">
+                                <div class="progress" style="height: 5px;">
+                                    <div id="passwordStrength" class="progress-bar bg-danger" role="progressbar" style="width: 0%"></div>
+                                </div>
+                                <small class="text-muted" id="strengthText">Password strength: Weak</small>
+                            </div>
+
+                            <!-- Terms -->
+                            <div class="mb-3 form-check">
+                                <input 
+                                    type="checkbox" 
+                                    class="form-check-input" 
+                                    id="agree_terms" 
+                                    name="agree_terms"
+                                    required
+                                >
+                                <label class="form-check-label" for="agree_terms">
+                                    I agree to the Terms of Service
+                                </label>
+                                <div class="invalid-feedback">
+                                    You must agree to the terms.
+                                </div>
+                            </div>
+
+                            <!-- Register Button -->
+                            <button type="submit" class="btn btn-success btn-lg w-100 mb-3">
+                                <i class="fas fa-user-plus"></i> Create Account
+                            </button>
+                        </form>
+
+                        
+
+                        <!-- Divider -->
+                        <div class="text-center mb-3">
+                            <hr>
+                            <small class="text-muted">Already have an account?</small>
+                        </div>
+
+                        <!-- Login Link -->
+                        <a href="{{ url_for('auth.login') }}" class="btn btn-outline-success btn-lg w-100">
+                            <i class="fas fa-sign-in-alt"></i> Sign In
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Footer Text -->
+                <div class="text-center mt-4">
+                    <p class="text-muted small">
+                        <i class="fas fa-shield-alt"></i> Your data is encrypted and secure
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .bg-gradient {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        min-height: 100vh;
+    }
+    
+    .card {
+        border-radius: 15px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .form-control, .form-control-lg {
+        border-radius: 10px;
+        border: 2px solid #e0e0e0;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .form-control:focus, .form-control-lg:focus {
+        border-color: #11998e;
+        box-shadow: 0 0 0 0.2rem rgba(17, 153, 142, 0.25);
+    }
+    
+    .btn-success {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        border: none;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-success:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(17, 153, 142, 0.4);
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const passwordInput = document.getElementById('password');
+    const strengthBar = document.getElementById('passwordStrength');
+    const strengthText = document.getElementById('strengthText');
+    
+    passwordInput.addEventListener('input', function() {
+        const password = this.value;
+        let strength = 0;
+        let text = 'Weak';
+        let color = 'bg-danger';
+        
+        if (password.length >= 6) strength += 25;
+        if (password.length >= 10) strength += 25;
+        if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength += 25;
+        if (/\d/.test(password)) strength += 25;
+        
+        if (strength >= 75) {
+            text = 'Strong';
+            color = 'bg-success';
+        } else if (strength >= 50) {
+            text = 'Medium';
+            color = 'bg-warning';
+        }
+        
+        strengthBar.style.width = strength + '%';
+        strengthBar.className = 'progress-bar ' + color;
+        strengthText.textContent = 'Password strength: ' + text;
+    });
+});
+</script>
+{% endblock %}
